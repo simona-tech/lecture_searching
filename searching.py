@@ -38,7 +38,20 @@ def linear_search(sequential_data, wanted_number):
     count = len(positions)
     return {"positions":positions,"count":count}
 
+def binary_search(number_list, wanted_number):
+    levy_okraj = 0
+    pravy_okraj = len(number_list)-1
+    while levy_okraj <= pravy_okraj:
+        middle = (levy_okraj + pravy_okraj) // 2
+        if number_list[middle] == wanted_number:
+            return middle
+        elif number_list[middle] < wanted_number:
+            levy_okraj = middle +1
+        elif number_list[middle] > wanted_number:
+            pravy_okraj = middle -1
+    return pravy_okraj
+
 
 if __name__ == "__main__":
-    mama = main("sequential.json", "unordered_numbers")
-    print(linear_search(mama, 0))
+    mama = main("sequential.json", "ordered_numbers")
+    print(binary_search(mama, 90))
