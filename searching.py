@@ -19,14 +19,14 @@ def read_data(file_name, field):
     cwd_path = Path.cwd()
     
     file_path = cwd_path / file_name
-    with open(file_name, "r") as file:
+    with open(file_path, "r") as file:
         data = json.load(file)
         if field not in data:
             return None
         return data[field]
 
-def main(file_name, field):
-    sequential_data = read_data(file_name, field)
+def main(file_path, field):
+    sequential_data = read_data(file_path, field)
     print(sequential_data)
     return sequential_data
 
@@ -41,4 +41,4 @@ def linear_search(sequential_data, wanted_number):
 
 if __name__ == "__main__":
     mama = main("sequential.json", "unordered_numbers")
-    print(linear_search(mama, 5))
+    print(linear_search(mama, 0))
