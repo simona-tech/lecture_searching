@@ -28,8 +28,17 @@ def read_data(file_name, field):
 def main(file_name, field):
     sequential_data = read_data(file_name, field)
     print(sequential_data)
-    return None
+    return sequential_data
+
+def linear_search(sequential_data, wanted_number):
+    positions = []
+    for idx, val in enumerate(sequential_data):
+        if val == wanted_number:
+            positions.append(idx)
+    count = len(positions)
+    return {"positions":positions,"count":count}
 
 
 if __name__ == "__main__":
-    main("sequential.json", "unordered_numbers")
+    mama = main("sequential.json", "unordered_numbers")
+    print(linear_search(mama, 5))
