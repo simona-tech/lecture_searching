@@ -4,8 +4,6 @@ import json
 
 def read_data(file_name, field):
     """
-    Reads a JSON file and returns data for a given field.
-
     Args:
         file_name (str): Name of the JSON file.
         field (str): Key to retrieve from the JSON data.
@@ -21,11 +19,17 @@ def read_data(file_name, field):
     cwd_path = Path.cwd()
     
     file_path = cwd_path / file_name
+    with open(file_name, "r") as file:
+        data = json.load(file)
+        if field not in data:
+            return None
+        return data[field]
 
-
-def main():
-    pass
+def main(file_name, field):
+    sequential_data = read_data(file_name, field)
+    print(sequential_data)
+    return None
 
 
 if __name__ == "__main__":
-    main()
+    main("sequential.json", "unordered_numbers")
