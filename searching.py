@@ -1,5 +1,8 @@
 from pathlib import Path
 import json
+import time
+import generators as gen
+import matplotlib.pyplot as plt
 
 
 def read_data(file_name, field):
@@ -51,7 +54,31 @@ def binary_search(number_list, wanted_number):
             pravy_okraj = middle -1
     return pravy_okraj
 
+sizes = [100, 500, 1000, 5000, 10000]
+
+linear_times = []
+for n in sizes:
+    lin_start = time.perf_counter()
+    linear_search(gen.unordered_sequence(n),10)
+    lin_end = time.perf_counter()
+    duration = lin_end - lin_start
+    linear_times.append(duration)
+
+binary_times = []
+for n in sizes:
+    bin_start = time.perf_counter()
+    binary_search(gen.unordered_sequence(n),10)
+    bin_end = time.perf_counter()
+    duration = bin_end - bin_start
+    binary_times.append(duration)
+
+plt.plot(sizes, binary_times)
+
+plt.xlabel("Velikost vstupu")
+plt.ylabel("Čas [s]")
+plt.title("Ukázkový graf měření")
+plt.show()
 
 if __name__ == "__main__":
-    mama = main("sequential.json", "ordered_numbers")
-    print(binary_search(mama, 90))
+    print(linear_times)
+    print(binary_times)
